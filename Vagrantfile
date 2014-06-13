@@ -27,10 +27,10 @@ chkconfig docker on
 gpasswd -a vagrant docker
 
 # build container
-docker build -t centos:httpd /vagrant
+docker build --rm -t centos:spvsd /vagrant
 
 # run container
-docker run -d -i -t -p 80:80 -v /vagrant:/mnt:rw centos:httpd
+docker run -d -i -t -p 80:80 -p 2222:22 -v /vagrant:/mnt:rw centos:spvsd
 
 	EOT
 
