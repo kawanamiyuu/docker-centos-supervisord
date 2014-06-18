@@ -1,7 +1,7 @@
-vagrant-docker
+docker-centos-supervisord
 ==============
 
-Docker with supervisord, httpd, sshd on Vagrant (not docker provider)
+Docker with supervisord, httpd, sshd on CentOS by Vagrant (not docker provider)
 
 ## Build and Run container
 
