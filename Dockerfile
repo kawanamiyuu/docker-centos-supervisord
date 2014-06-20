@@ -10,6 +10,9 @@ RUN yum --enablerepo=epel install -y supervisor
 RUN mv -f /etc/supervisord.conf /etc/supervisord.conf.org
 ADD ./supervisord.conf /etc/
 
+# install rsyslogd
+RUN yum install -y rsyslog
+
 # install sshd
 RUN yum install -y openssh-server
 RUN echo 'root:root' | chpasswd
