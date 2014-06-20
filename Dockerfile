@@ -13,12 +13,18 @@ ADD ./supervisord.conf /etc/
 # install rsyslogd
 RUN yum install -y rsyslog
 
+# install crond
+RUN yum install -y cronie-noanacron
+# no PAM
+RUN sed -i -e 's/^session\s\+required\s\+pam_loginuid\.so/#session required pam_loginuid.so/' /etc/pam.d/crond
+
 # install sshd
 RUN yum install -y openssh-server
 RUN echo 'root:root' | chpasswd
+# no PAM
 # http://stackoverflow.com/questions/18173889/cannot-access-centos-sshd-on-docker
-RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
-RUN sed -ri 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config
+RUN sed -i -e 's/^UsePAM yes/#UsePAM yes/' /etc/ssh/sshd_config
+RUN sed -i -e 's/^#UsePAM no/UsePAM no/' /etc/ssh/sshd_config
 
 # install httpd
 RUN yum install -y httpd
