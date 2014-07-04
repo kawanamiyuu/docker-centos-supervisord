@@ -26,15 +26,11 @@ chkconfig docker on
 # add vagrant user to docker group
 gpasswd -a vagrant docker
 
-pushd /vagrant
-
 # build container
-sh docker-build
+sh /vagrant/docker-build.sh
 
 # run container
-sh docker-run
-
-popd
+sh /vagrant/docker-run.sh
 
 	EOT
 
