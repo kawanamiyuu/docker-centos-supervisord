@@ -36,3 +36,9 @@ EXPOSE 22 80
 # --> "Error: positional arguments are not supported"
 # http://stackoverflow.com/questions/22465003/error-positional-arguments-are-not-supported
 CMD ["/usr/bin/supervisord"]
+
+# install vim
+RUN yum install -y vim
+RUN echo 'syntax on' >> /root/.vimrc
+RUN echo 'alias vi="vim"' >> /root/.bashrc
+
