@@ -26,11 +26,15 @@ chkconfig docker on
 # add vagrant user to docker group
 gpasswd -a vagrant docker
 
+pushd /vagrant
+
 # build container
-docker build --rm -t centos:spvsd /vagrant
+sh docker-build
 
 # run container
-docker run -d -i -t -p 80:80 -p 2222:22 -v /vagrant:/mnt:rw centos:spvsd
+sh docker-run
+
+popd
 
 	EOT
 

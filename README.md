@@ -1,7 +1,7 @@
 docker-centos-supervisord
 ==============
 
-Docker container with supervisord, rsyslogd, crond, sshd, httpd on CentOS by Vagrant (not docker provider)
+Docker container with supervisord, rsyslogd, crond, sshd on CentOS by Vagrant (not docker provider)
 
 ## Build and Run container
 
@@ -9,11 +9,9 @@ Docker container with supervisord, rsyslogd, crond, sshd, httpd on CentOS by Vag
 
 ```bash
 $ docker ps
-CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                                      NAMES
-6e1af309faee        centos:spvsd        /usr/bin/supervisord   4 seconds ago       Up 3 seconds        0.0.0.0:80->80/tcp, 0.0.0.0:2222->22/tcp   kickass_mccarthy
+CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                    NAMES
+6e1af309faee        centos:spvsd        /usr/bin/supervisord   4 seconds ago       Up 3 seconds        0.0.0.0:2222->22/tcp     kickass_mccarthy
 ```
-
-Access ```http://192.168.33.10/``` in your browser, Apache sample page is displayed.
 
 ## SSH into container
 

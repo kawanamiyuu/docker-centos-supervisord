@@ -26,11 +26,8 @@ RUN echo 'root:root' | chpasswd
 RUN sed -i -e 's/^UsePAM yes/#UsePAM yes/' /etc/ssh/sshd_config
 RUN sed -i -e 's/^#UsePAM no/UsePAM no/' /etc/ssh/sshd_config
 
-# install httpd
-RUN yum install -y httpd
-
-# expose for sshd, httpd
-EXPOSE 22 80
+# for sshd
+EXPOSE 22
 
 # ENTRYPOINT ["/usr/bin/supervisord"] does not work.
 # --> "Error: positional arguments are not supported"
