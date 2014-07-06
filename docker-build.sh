@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker build --rm -t centos:spvsd `dirname $0`
+docker build --rm -t kawanamiyuu/docker-centos-supervisord `dirname $0`
 docker images
