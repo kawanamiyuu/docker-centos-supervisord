@@ -1,5 +1,8 @@
 FROM centos
 
+# install basic packages
+RUN yum install -y wget tar gcc
+
 # set timezone
 RUN rm -f /etc/localtime
 RUN ln -s /usr/share/zoneinfo/UTC /etc/localtime
