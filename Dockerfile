@@ -1,4 +1,4 @@
-FROM centos
+FROM centos:centos6
 
 # install basic packages
 RUN yum install -y wget tar gcc
