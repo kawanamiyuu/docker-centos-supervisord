@@ -41,5 +41,5 @@ CMD ["/usr/bin/supervisord"]
 # install vim
 RUN yum install -y vim
 RUN echo 'syntax on' >> /root/.vimrc
-RUN echo 'alias vi="vim"' >> /root/.bashrc
+RUN echo 'alias vi="vim"' >> /root/.bash_profile
 
