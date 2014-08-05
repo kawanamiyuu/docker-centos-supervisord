@@ -26,6 +26,12 @@ chkconfig docker on
 # add vagrant user to docker group
 gpasswd -a vagrant docker
 
+# aliases of docker commands
+echo 'alias di="docker images"' >> /home/vagrant/.bashrc
+echo 'alias dp="docker ps"'     >> /home/vagrant/.bashrc
+echo 'alias drmi="docker rmi -f `docker images -aq` && docker images -a"' >> /home/vagrant/.bashrc
+echo 'alias drm="docker rm -f `docker ps -aq` && docker ps -a"'           >> /home/vagrant/.bashrc
+
 # build container
 sh /vagrant/docker-build.sh
 
