@@ -26,13 +26,13 @@ $ docker inspect 6e1af309faee | grep IPAddress
         "IPAddress": "172.17.0.2",
 
 # ssh into container
-$ ssh root@172.17.0.2 # password: root
+$ ssh appuser@172.17.0.2 # password: appuser
 ```
 
 from Local
 
 ```bash
 # ssh into container
-$ ssh root@192.168.33.10 -p 2222 # password: root
+$ ssh appuser@192.168.33.10 -p 2222 # password: appuser
 ```
 
