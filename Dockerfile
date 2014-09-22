@@ -23,12 +23,21 @@ RUN cp -a /etc/pam.d/crond /etc/pam.d/crond.org
 RUN sed -i -e 's/^\(session\s\+required\s\+pam_loginuid\.so\)/#\1/' /etc/pam.d/crond
 
 # install sshd
-RUN yum install -y openssh-server
-RUN echo 'root:root' | chpasswd
+RUN yum install -y openssh-server sudo
 # no PAM
 # http://stackoverflow.com/questions/18173889/cannot-access-centos-sshd-on-docker
-RUN cp -a /etc/ssh/sshd_config /etc/ssh/sshd_config.org
-RUN sed -i -e 's/^\(UsePAM\s\+yes\)/#\1/' -e 's/^#\(UsePAM\s\+no\)/\1/' /etc/ssh/sshd_config
+RUN sed -i -e 's/^\(UsePAM\s\+.\+\)/#\1/gi' /etc/ssh/sshd_config
+RUN echo -e '\nUsePAM no' >> /etc/ssh/sshd_config
+
+RUN echo 'root:root' | chpasswd
+# no direct ROOT login
+RUN sed -i -e 's/^\(PermitRootLogin\s\+.\+\)/#\1/gi' /etc/ssh/sshd_config
+RUN echo -e '\nPermitRootLogin no' >> /etc/ssh/sshd_config
+
+RUN useradd -g wheel appuser
+RUN echo 'appuser:appuser' | chpasswd
+RUN sed -i -e 's/^\(%wheel\s\+.\+\)/#\1/gi' /etc/sudoers
+RUN echo -e '\n%wheel ALL=(ALL) ALL' >> /etc/sudoers
 
 # for sshd
 EXPOSE 22
@@ -40,6 +49,9 @@ CMD ["/usr/bin/supervisord"]
 
 # install vim
 RUN yum install -y vim
-RUN echo 'syntax on' >> /root/.vimrc
+# for root
+RUN echo 'syntax on'      >> /root/.vimrc
 RUN echo 'alias vi="vim"' >> /root/.bash_profile
-
+# for appuser
+RUN echo 'syntax on'      >> /home/appuser/.vimrc
+RUN echo 'alias vi="vim"' >> /home/appuser/.bash_profile
