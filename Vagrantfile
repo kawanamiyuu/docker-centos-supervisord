@@ -27,10 +27,12 @@ chkconfig docker on
 gpasswd -a vagrant docker
 
 # aliases of docker commands
-echo 'alias di="docker images"' >> /home/vagrant/.bashrc
-echo 'alias dp="docker ps"'     >> /home/vagrant/.bashrc
-echo 'alias drmi="docker rmi -f `docker images -aq` && docker images -a"' >> /home/vagrant/.bashrc
-echo 'alias drm="docker rm -f `docker ps -aq` && docker ps -a"'           >> /home/vagrant/.bashrc
+cat << TXT >> /home/vagrant/.bashrc
+alias di='docker images'
+alias dp='docker ps'
+alias drmi='docker rmi -f \$(docker images -aq) && docker images -a'
+alias drm='docker rm -f \$(docker ps -aq) && docker ps -a'
+TXT
 
 # build container
 sh /vagrant/docker-build.sh
