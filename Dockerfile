@@ -1,3 +1,5 @@
+MAINTAINER kawanamiyuu <https://hub.docker.com/u/kawanamiyuu/>
+
 FROM centos:centos6
 
 # install basic packages
@@ -38,6 +40,11 @@ RUN useradd -g wheel appuser
 RUN echo 'appuser:appuser' | chpasswd
 RUN sed -i -e 's/^\(%wheel\s\+.\+\)/#\1/gi' /etc/sudoers
 RUN echo -e '\n%wheel ALL=(ALL) ALL' >> /etc/sudoers
+
+# allow sudo without tty for ROOT user and WHEEL group
+# http://qiita.com/ryo0301/items/4daf5a6d22f16193410f
+RUN echo -e '\nDefaults:root   !requiretty' >> /etc/sudoers
+RUN echo -e '\nDefaults:%wheel !requiretty' >> /etc/sudoers
 
 # for sshd
 EXPOSE 22
