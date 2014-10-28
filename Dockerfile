@@ -1,6 +1,7 @@
-MAINTAINER kawanamiyuu <https://hub.docker.com/u/kawanamiyuu/>
-
 FROM centos:centos6
+
+# https://hub.docker.com/u/kawanamiyuu
+MAINTAINER kawanamiyuu
 
 # install basic packages
 RUN yum install -y wget tar gcc
